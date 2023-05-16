@@ -26,12 +26,6 @@ const updatePaginationDiv = (currentPage, numPages) => {
       <button class="btn btn-primary page ml-1 numberedButtons" value="${currentPage + 1}">Next</button>
     `);
   }
-
-  const totalPokemonCount = pokemons.length;
-  const startPokemonIndex = (currentPage - 1) * PAGE_SIZE + 1;
-  const endPokemonIndex = Math.min(currentPage * PAGE_SIZE, totalPokemonCount);
-  const showingText = `Showing ${startPokemonIndex} to ${endPokemonIndex} out of ${totalPokemonCount} Pokémon`;
-  $('#showing').html(`<h2>${showingText}</h2>`);
 };
 
 const paginate = async (currentPage, PAGE_SIZE, pokemons) => {
@@ -131,7 +125,6 @@ const setup = async () => {
         <h5>${res.data.id}</h5>
       `);
     });
-
   
     // Add event listener to pagination buttons
     $('body').on('click', '.numberedButtons', async function (e) {
@@ -139,10 +132,9 @@ const setup = async () => {
       paginate(currentPage, PAGE_SIZE, pokemons);
   
       // Update pagination buttons
-      updatePaginationDiv(currentPage, numPages, pokemons);
+      updatePaginationDiv(currentPage, numPages);
     });
-
-}
+  };
   
   $(document).ready(setup);
   
